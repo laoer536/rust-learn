@@ -2,6 +2,9 @@
 name = "rust-learn"
 version = "0.1.0"
 edition = "2021"
+description = "test"
+repository = "https://github.com/laoer536/rust-learn"
+license = "MIT"
 
 [lib]
 crate-type = ["cdylib"]
