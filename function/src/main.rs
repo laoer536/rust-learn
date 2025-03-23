@@ -25,6 +25,7 @@ fn print_z() {
     println!("The value of base is: {}", base); // -> 3 而不是4 类似JS 作用域
     println!("The value of z is: {}", z);
     println!("The value of m is: {}", m);
+    //最后drop函数释放
 }
 
 fn get_plus_five(x: i32) -> i32 {
