@@ -15,7 +15,7 @@
 .vscode/
 
 # If using IntelliJ IDEA or other JetBrains IDEs, you might want to ignore its project files
-.idea/
+.idea
 
 # If using Vim or Emacs, you might want to ignore their swap files
 *.swp
