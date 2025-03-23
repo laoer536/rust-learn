@@ -39,3 +39,5 @@ Desktop.ini
 # Dependency directories (remove the comment below if you want to ignore them)
 # /Cargo.lock
 # /.cargo/
+
+target
