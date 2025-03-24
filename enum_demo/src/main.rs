@@ -35,6 +35,21 @@ fn main() {
     let home = IpAddrKind2::V4(127, 0, 0, 1); //更简化的表述了更多信息
     let loopback = IpAddrKind2::V6(String::from("::1")); //更简化的表述了更多信息
     home.do_something();
+
+    //Rust中是没有null的 所以引入了Option枚举
+    //enum Option<T> {
+    //Some(T),
+    //None
+    //}
+    let some_number: Option<i32> = Some(5);
+    // let some_number= Some(5); //也可以这样简写 让自动推断
+    let some_string: Option<&str> = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    let x: i8 = 5;
+    let y: Option<i8> = Some(5); //表示可能是类型为i8的5 也可能不存在
+    // let sum = x + y; // Error Option<i8> 与 i8 类型不能相加
+    let sum = x + y.unwrap_or(0); // Success 使用unwrap_or把y转换为i8
 }
 
 fn route(ip_type: IpAddrKind) -> IpAddrKind {
