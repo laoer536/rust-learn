@@ -54,3 +54,7 @@ fn calculate_length_mut(s: &mut String) -> usize { //把引用作为函数参数
 //     let s = String::from("hello");
 //     &s //s离开作用域时会被销毁 所以这里&s是一个悬空指针 rust会在编译阶段报错 让你避免这种情况的发生
 // }
+
+// 引用的规则：
+// 给定的时刻 要么满足一个不可变引用要么满足任意数量的不可变引用 二者只能满足其一
+// 引用必须一直有效 参考dangle函数demo
