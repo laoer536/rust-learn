@@ -1,7 +1,6 @@
-//根是隐式crate模块
+// src/lib.rs是库crate模块 是“crate”的入口 代表库crate 用来提供可复用的代码库
 
 mod front_of_house;
-mod some;
 // 在src下面找名字为front_of_house的rs文件
 
 fn serve_order() {}
@@ -42,7 +41,7 @@ pub fn eat_at_restaurant_2() {
     // meal.seasonal_fruit = String::from("blueberries"); // Error seasonal_fruit是私有字段
 }
 
-//将hosting提取到当前作用域
+//将hosting提取到当前作用域 这里提到了顶级
 pub use crate::front_of_house::hosting; //本身以及如果有成员的话仍然遵循私有性原则 这里是私有的 仅在该作用域中可以用 可以前面加pub使其变为公有
 pub fn eat_at_restaurant_3() {
     //这里hosting可以直接使用
