@@ -1,6 +1,9 @@
-// src/lib.rs是库crate模块 是“crate”的入口 代表库crate 用来提供可复用的代码库
+// src/lib.rs是库crate模块 是库“crate”的入口 代表库crate 用来提供可复用的代码库 建议所有mod在这里汇总 方便其他位置用绝对路径使用
+// 这里的 “crate”指向的是src/lib.rs内容
+// use crate::serve_order;
 
 mod front_of_house;
+mod some; //这里mod声明后 some为库crate的子模块 如果子模块要使用 use crate::xxx导入 那么这里的crate代表就是src/lib.rs的内容 为库crate的根
 // 在src下面找名字为front_of_house的rs文件
 
 fn serve_order() {}
@@ -42,7 +45,7 @@ pub fn eat_at_restaurant_2() {
 }
 
 //将hosting提取到当前作用域 这里提到了顶级
-pub use crate::front_of_house::hosting; //本身以及如果有成员的话仍然遵循私有性原则 这里是私有的 仅在该作用域中可以用 可以前面加pub使其变为公有
+use crate::front_of_house::hosting; //本身以及如果有成员的话仍然遵循私有性原则 这里是私有的 仅在该作用域中可以用 可以前面加pub使其变为公有
 pub fn eat_at_restaurant_3() {
     //这里hosting可以直接使用
     hosting::add_to_waitlist();
