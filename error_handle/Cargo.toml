@@ -1,0 +1,10 @@
+[package]
+name = "error_handle"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[profile.release]
+# 想让二进制更小，把设置从“展开”改为“中止”
+panic = "abort"
