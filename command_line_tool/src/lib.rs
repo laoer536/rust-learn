@@ -1,7 +1,7 @@
-use std::error::Error;
-use std::{env, fs};
+use std::{env, error::Error, fs};
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    //使用 Box<dyn Error> 作为统一的错误类型，使得函数可以返回任意实现了 Error trait 的错误。
     let contents = fs::read_to_string(config.filename)?;
     let results = if config.case_sensitive {
         search(&config.query, &contents)
