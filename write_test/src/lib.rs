@@ -5,6 +5,10 @@
 //默认情况下测试通过的情况下控制台不会输出用户打印的内容 例如println!打印的内容 但可以加命令行参数解决 cargo test -- --show-output
 //默认情况下会运行所有测试 但可以通过指定测试名来运行单个测试 例如cargo test result_test_demo或者批量指定 只需指定测试名的一部分（模块名也可以）例如cargo test it(会测试it_works_1和it_works_2)
 
+//测试的分类：
+//单元测试：小、专注，一次对一个模块进行隔离测试，可测试private接口
+//集成测试：在外部库。和其他外部代码一样使用你的代码、只能使用public接口，可能在每个测试中使用到多个模块，目的是测试被测试库的多个部分是否能正确的一起工作，集成测试的覆盖率很重要。
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
@@ -55,9 +59,9 @@ impl Guess {
 //测试函数panic就表示失败
 //每个测试运行在一个新线程，当主线程看见某个测试线程挂掉了（发生了panic），那个测试标记为失败。
 
-#[cfg(test)]
+#[cfg(test)] //例如这里 标注之后 这一块tests代表的就是单元测试 只有运行cargo test才编译和运行的代码 运行cargo build则不会
 mod tests {
-    use super::*;
+    use super::*; //这样导入之后 外部的所有都可以使用 包括没有pub声明的
 
     #[test]
     fn it_works_1() {
