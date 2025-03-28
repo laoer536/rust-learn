@@ -1,0 +1,78 @@
+use std::error::Error;
+use std::{env, fs};
+
+pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    let contents = fs::read_to_string(config.filename)?;
+    let results = if config.case_sensitive {
+        search(&config.query, &contents)
+    } else {
+        search_case_insensitive(&config.query, &contents)
+    };
+    for line in search(&config.query, &contents) {
+        println!("{}", line);
+    }
+    Ok(())
+}
+
+//struct来抽象
+pub struct Config {
+    query: String,
+    filename: String,
+    case_sensitive: bool,
+}
+impl Config {
+    //返回Result来处理
+    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+        println!("{:?}", args);
+        if args.len() < 3 {
+            // panic!("Not enough arguments provided!"); //这样的话使用者会看到很多的信息 其实这些信息对用户来说是看不懂的 所以我们需要自定义错误信息 这个时候就需要用Result 然后在调用处处理异常和定义异常时的显示内容
+            return Err("not enough arguments");
+        }
+        let query = &args[1];
+        let filename = &args[2];
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err(); //获取环境变量 命令行就可以是 CASE_INSENSITIVE=1 cargo run cargo README.md 表示设置环境变量后运行cargo run
+        Ok(Config {
+            query: query.to_string(),
+            filename: filename.to_string(),
+            case_sensitive,
+        })
+    }
+}
+
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let mut results = Vec::new();
+    for line in contents.lines() {
+        if line.contains(query) {
+            results.push(line);
+        }
+    }
+    results
+}
+
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let mut results = Vec::new();
+    let query = query.to_lowercase();
+    for line in contents.lines() {
+        if line.contains(&query) {
+            results.push(line);
+        }
+    }
+    results
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn case_sensitive() {
+        let query = "duct";
+        let contents = "\
+        Rust:\
+        safe, fast, productive.\
+Pick three.\
+Duct tape.";
+        "
+        ";
+        assert_eq!(vec!["safe,fast,productive."], search(query, contents));
+    }
+}
