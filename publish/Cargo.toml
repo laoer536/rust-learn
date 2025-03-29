@@ -1,6 +1,6 @@
 [package]
 name = "publish"
-version = "0.1.0" #发布新版本，参照http://semver.org来使用你的语义版本。需要修改version才能发布新的版本。
+version = "0.1.1" #发布新版本，参照http://semver.org来使用你的语义版本。需要修改version才能发布新的版本。
 description = "Test my publish crate."
 authors = ["laoer536"]
 edition = "2024"
