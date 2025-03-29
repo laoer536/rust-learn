@@ -13,8 +13,8 @@ use std::{env, process};
 //若想同时重定向 stdout 和 stderr，可以使用 &>（在 bash 中）： cargo build &> all_output.log
 
 fn main() {
-    let args: Vec<String> = env::args().collect(); //获取命令行参数集合
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let args = env::args(); //获取命令行参数集合
+    let config = Config::new(args).unwrap_or_else(|err| {
         //这里类似TS回调函数 err是函数参数 {}里面是函数体
         eprintln!("Problem parsing arguments: {}", err); //cargo run > output.txt
         process::exit(1);
