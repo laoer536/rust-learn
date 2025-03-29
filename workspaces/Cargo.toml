@@ -1,7 +1,7 @@
 #所有工作空间的项目会共享一个lock文件 子项目就不会有Cargo.lock文件了
 [workspace]
 members = [
-    "adder", #可通过在项目根目录使用cargo new adder来创建workspace 二进制crate项目
-    "add-one", #可通过在项目根目录使用cargo new add-one --lib来创建workspace 二进制crate项目
-    "add-two", #可通过在项目根目录使用cargo new add-one --lib来创建workspace 二进制crate项目
+    "adder", #可通过在项目根目录使用cargo new adder来创建workspace 二进制crate项目(binary crate)
+    "add-one", #可通过在项目根目录使用cargo new add-one --lib来创建workspace 库crate项目(libary crate)
+    "add-two", #可通过在项目根目录使用cargo new add-one --lib来创建workspace 库crate项目(libary crate)
 ]
