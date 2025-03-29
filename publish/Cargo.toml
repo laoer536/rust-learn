@@ -1,0 +1,18 @@
+[package]
+name = "publish"
+version = "0.1.0"
+description = "Test my publish crate."
+authors = ["laoer536"]
+edition = "2024"
+license = "MIT"
+# See more : https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+#自定义profile 覆盖默认配置 具体配置详见：https://doc.rust-lang.org/cargo/
+[profile.dev]
+opt-level = 0 # opt-level 指编译优化程度 dev设置低一点 编译会更快
+
+
+[profile.release]
+opt-level = 3
