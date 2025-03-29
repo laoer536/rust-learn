@@ -14,8 +14,12 @@
 // use publish::kinds::PrimaryColor;
 // use publish::utils::mix;
 use publish::{PrimaryColor, mix}; //这样简写 在lib.rs中我们已经使用"pub use"将它们提到了顶部
+
+// 这里是binary crate,发布之后 用户可以通过cargo install来安装这个二进制crate,再通过命令行"publish" 来执行这个二进制程序
+// cargo install （安装在用户/.cargo/bin目录下)
 fn main() {
     let red = PrimaryColor::Red;
     let yellow = PrimaryColor::Yellow;
     mix(red, yellow);
+    println!("Hello, publish binary crate!");
 }

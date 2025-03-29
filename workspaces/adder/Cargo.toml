@@ -1,0 +1,8 @@
+[package]
+name = "adder"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+add-one = { path = "../add-one" } #使用workspace中的项目
+rand = "0.3.15" # workspace中会统一同一个包的不同版本 这里的实际使用版本是0.3.23
