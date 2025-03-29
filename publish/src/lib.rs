@@ -29,6 +29,9 @@
 //目的：my_crate::some_module::anther_module::UsefulType; -> my_crate::UsefulType; //让其导入更加简洁方便
 
 //发布包需要在crates.io上获取login token
+//使用cargo publish时默认git需要先提交 可以通过加参数 --allow-dirty 来不用先提交也可以发布
+//crate一旦发布，就是永久性的并且该版本无法覆盖，代码无法删除，目的是为了保证依赖于该版本的项目可以继续正常工作
+//使用cargo yank 可以从Crates.io撤回版本：防止新项目依赖于该版本，已经存在的项目可以继续将其作为依赖并可下载（因为已发布的是不能再删除的）命令：cargo yank --vers 0.1.0 表示撤回0.1.0版本 取消撤回cargo yank --vers 0.1.0 --undo
 pub fn add_one(x: i32) -> i32 {
     x + 1
 }
