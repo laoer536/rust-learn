@@ -7,9 +7,12 @@
 //Deref trait: 允许智能指针struct的实例像引用一样使用 使可以自定义解引用运算符*的行为 使智能指针可像常规引用一样来处理
 //Drop trait: 允许你自定义当智能指针实例走出作用域时的代码 当值要离开作用域时发生的动作
 
-//Box<T>: 在head内存上分配值（堆内存）stack上是指向heap上储存的数据 没有性能开销 没有其他额外功能
-//Rc<T>: 启用多重所有权的引用计数类型（引用计数，类似JS中的引用计数） 有时，一个值会有多个所有者，为了支持多重所有权 只能用于单线程场景
-//Ref<T>和RefMut<T>,通过RefCell<T>访问：在运行时而不是编译时强制借用规则的类型
+//Box<T>: 在head内存上分配值（堆内存）stack上是指向heap上储存的数据 没有性能开销 没有其他额外功能 一个 支持可变和不可变借用（编译时检查）
+//Rc<T>: 启用多重所有权的引用计数类型（引用计数，类似JS中的引用计数） 有时，一个值会有多个所有者，为了支持多重所有权 只能用于单线程场景 多个 不可变借用（编译时检查）
+//Ref<T>和RefMut<T>,通过RefCell<T>访问：在运行时而不是编译时强制借用规则的类型 一个 可变、不可变借用（运行时检查）
+//扩展：
+//Cell<T>:通过复制来访问数据
+//Mutex<T>:用于实现跨线程情形的内部可变性模式
 
 //此外：
 //内部可变模式：不可变类型暴露出可修改其内部值的API
@@ -99,16 +102,4 @@ fn drop_custom_smart() {
         data: String::from("other stuff"),
     };
     println!("CustomSmartPointers created.");
-}
-
-enum List2 {
-    Cons(i32, Rc<List2>),
-    Nil,
-}
-
-fn rc_t_demo() {
-    // let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
-    // let b = Cons(3, Box::new(a));
-    // let c = Cons(4, Box::new(a)); //Error a已经move到b中了
-    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
 }
