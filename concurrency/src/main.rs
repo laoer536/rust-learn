@@ -171,7 +171,7 @@ fn mutex_demo2() {
     for handle in handles {
         handle.join().unwrap();
     }
-    println!("Result: {}", *counter.lock().unwrap());
+    println!("Result: {}", *counter.lock().unwrap()); //10
 }
 
 //死锁
@@ -211,20 +211,28 @@ fn deadlock1() {
 
 //3. 通道（channel）的阻塞等待
 // 发送端和接收端因未正确处理消息而互相等待：
-fn deadlock2() {
-    let (tx1, rx1) = mpsc::channel();
-    let (tx2, rx2) = mpsc::channel();
+// fn deadlock2() {
+//     let (tx1, rx1) = mpsc::channel();
+//     let (tx2, rx2) = mpsc::channel();
+//
+//     let tx1_clone = mpsc::Sender::clone(&tx1);
+//     thread::spawn(move || {
+//         let msg = rx2.recv().unwrap(); // 等待接收消息
+//         tx1_clone.send(msg).unwrap();
+//     });
+//
+//     thread::spawn(move || {
+//         let msg = rx1.recv().unwrap(); // 等待接收消息
+//         tx2.send(msg).unwrap();
+//     });
+//
+//     // 两个线程都在等待对方先发送消息，导致死锁
+// }
 
-    let tx1_clone = mpsc::Sender::clone(&tx1);
-    thread::spawn(move || {
-        let msg = rx2.recv().unwrap(); // 等待接收消息
-        tx1_clone.send(msg).unwrap();
-    });
-
-    thread::spawn(move || {
-        let msg = rx1.recv().unwrap(); // 等待接收消息
-        tx2.send(msg).unwrap();
-    });
-
-    // 两个线程都在等待对方先发送消息，导致死锁
-}
+//Send和Sync trait
+//std::marker::Sync和std::marker::Send这两个trait
+//Send:允许线程间转移所有权 实现Send trait的类型可在线程间转移所有权 Rust中几乎所有的类型都实现了Send 但Rc<T>没有实现Send, 它只用于单线程场景
+//Sync的类型可以安全的被多个线程使用，也就是说：如果T是Sync,那么&T就是Send(引用可以被安全的送往另一个线程)
+//基础类型是Sync
+//完全有Sync类型组成的数据类型也是Sync, 但Rc<T>不是、RefCell<T>和Cell<T>家族也不是Sync，另外Mutex<T>是Sync的
+//手动实现Send和Sync trait是不安全的
