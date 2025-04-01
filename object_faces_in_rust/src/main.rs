@@ -8,6 +8,7 @@
 //为共有行为定义一个trait(专门用于抽象某些共有行为，它没有其它语言中的对象那么通用)
 
 mod gui;
+mod state_pattern;
 
 pub struct AveragedCollection {
     list: Vec<i32>,
