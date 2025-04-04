@@ -1,3 +1,5 @@
+mod advanced_trait;
+
 use std::slice;
 
 //高级特性：
