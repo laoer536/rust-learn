@@ -1,4 +1,5 @@
 mod advanced_trait;
+mod advanced_type;
 
 use std::slice;
 
