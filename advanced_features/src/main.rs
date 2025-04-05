@@ -1,5 +1,7 @@
+mod advanced_fn;
 mod advanced_trait;
 mod advanced_type;
+mod macro_learn;
 
 use std::slice;
 
